@@ -2,7 +2,6 @@ package memory
 
 import (
 	"bytes"
-	"fmt"
 	"io"
 	"sort"
 	"testing"
@@ -51,7 +50,6 @@ func Test_GetAll(t *testing.T) {
 		t.Run(testCase.desc, func(t *testing.T) {
 			assert := assert.New(t)
 			mem, err := New(testCase.r)
-			fmt.Println(testCase.expectedErr, err)
 			if testCase.expectedErr != nil {
 				if testCase.expectedErr.Error() != err.Error() {
 					t.Fatal("errors dont match")
