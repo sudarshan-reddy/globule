@@ -12,7 +12,6 @@ import (
 )
 
 type memoryStore struct {
-	//consider sharding this
 	coordCh chan storage.Coords
 }
 
