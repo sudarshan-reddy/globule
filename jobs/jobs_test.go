@@ -49,14 +49,14 @@ func Test_Run(t *testing.T) {
 			farthest: []CoordsWithDistance{
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 0.57,
 					Longitude: 100.21, ID: 5}, Distance: 1.035015809436041e+07}, //Padang
+				CoordsWithDistance{Coords: storage.Coords{Latitude: 3.09,
+					Longitude: 101.42, ID: 15}, Distance: 1.0211367939237328e+07}, //Kuala Lumpur
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 13.45,
 					Longitude: 100.28, ID: 3}, Distance: 9.225285580451041e+06}, //Bangkok
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 12.97,
 					Longitude: 80.22, ID: 1}, Distance: 7.9007132932833405e+06}, //Chennai
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 20.10,
 					Longitude: 57.30, ID: 4}, Distance: 5.742918808309662e+06}, //Port Louis
-				CoordsWithDistance{Coords: storage.Coords{Latitude: 8.50,
-					Longitude: 13.14, ID: 11}, Distance: 4.892782897359971e+06}, //Luanda
 			},
 		},
 	}
