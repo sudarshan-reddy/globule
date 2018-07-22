@@ -12,6 +12,7 @@ import (
 // parallelize calculation
 type Runner struct {
 	sync.Mutex
+	wg              sync.WaitGroup
 	coordinateStore storage.CoordinateStore
 	haversine       *haversine.Haversine
 	semaphore       chan struct{}
@@ -45,10 +46,13 @@ func (r *Runner) Run() (nearest, farthest []CoordsWithDistance, err error) {
 		return nil, nil, err
 	}
 	for coords := range coordsCh {
+		r.wg.Add(1)
 		r.semaphore <- struct{}{}
 		go r.handle(coords)
 
 	}
+
+	r.wg.Wait()
 
 	sort.Slice(r.coordsList, func(i, j int) bool {
 		return r.coordsList[i].Distance < r.coordsList[j].Distance
@@ -64,6 +68,9 @@ func (r *Runner) Run() (nearest, farthest []CoordsWithDistance, err error) {
 }
 
 func (r *Runner) handle(coords storage.Coords) {
+	r.Lock()
+	defer r.Unlock()
+	defer r.wg.Done()
 	distance := r.haversine.ShortestGCD(r.sourceCoords, coords)
 	r.coordsList = append(r.coordsList, CoordsWithDistance{Coords: coords, Distance: distance})
 	<-r.semaphore
