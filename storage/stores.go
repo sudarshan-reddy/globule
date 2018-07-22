@@ -14,6 +14,5 @@ type Coords struct {
 
 // CoordinateStore is the interface for doing coordinate based operations
 type CoordinateStore interface {
-	Get(ID int) (*Coords, error)
 	GetAll() (chan Coords, error)
 }

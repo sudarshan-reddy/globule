@@ -13,7 +13,7 @@ import (
 
 type memoryStore struct {
 	//consider sharding this
-	coordList map[int]storage.Coords
+	coordCh chan storage.Coords
 }
 
 // New returns a new instance of memoryStore that conforms to
@@ -21,7 +21,7 @@ type memoryStore struct {
 // implementation
 func New(r io.Reader) (storage.CoordinateStore, error) {
 	memStore := memoryStore{
-		coordList: make(map[int]storage.Coords),
+		coordCh: make(chan storage.Coords),
 	}
 	reader := csv.NewReader(r)
 
@@ -31,21 +31,28 @@ func New(r io.Reader) (storage.CoordinateStore, error) {
 		return nil, fmt.Errorf("error reading header: %s", err)
 	}
 
-	for {
-		records, err := reader.Read()
-		if err != nil {
-			if err == io.EOF {
-				break
+	go func(reader *csv.Reader) {
+		defer close(memStore.coordCh)
+		for {
+			records, err := reader.Read()
+			if err != nil {
+				if err == io.EOF {
+					break
+				}
+				wrappedErr := fmt.Errorf("error reading csv :%s", err)
+				if err != nil {
+					panic(wrappedErr)
+				}
 			}
-			return nil, fmt.Errorf("error reading csv :%s", err)
-		}
 
-		coords, err := makeCoords(records)
-		if err != nil {
-			return nil, fmt.Errorf("error making coords: %s", err)
+			coords, err := makeCoords(records)
+			if err != nil {
+				wrappedErr := fmt.Errorf("error making coords: %s", err)
+				panic(wrappedErr)
+			}
+			memStore.coordCh <- *coords
 		}
-		memStore.coordList[coords.ID] = *coords
-	}
+	}(reader)
 
 	return &memStore, nil
 }
@@ -77,22 +84,6 @@ func makeCoords(records []string) (*storage.Coords, error) {
 	}, nil
 }
 
-func (m *memoryStore) Get(ID int) (*storage.Coords, error) {
-	coords, ok := m.coordList[ID]
-	if !ok {
-		return nil, storage.ErrRecordNotFound
-	}
-
-	return &coords, nil
-}
-
 func (m *memoryStore) GetAll() (chan storage.Coords, error) {
-	var coordsCh = make(chan storage.Coords)
-	go func() {
-		defer close(coordsCh)
-		for _, coords := range m.coordList {
-			coordsCh <- coords
-		}
-	}()
-	return coordsCh, nil
+	return m.coordCh, nil
 }
