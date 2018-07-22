@@ -20,7 +20,7 @@ type memoryStore struct {
 // implementation
 func New(r io.Reader) (storage.CoordinateStore, error) {
 	memStore := memoryStore{
-		coordCh: make(chan storage.Coords),
+		coordCh: make(chan storage.Coords, 100),
 	}
 	reader := csv.NewReader(r)
 
