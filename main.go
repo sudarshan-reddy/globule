@@ -37,10 +37,14 @@ func main() {
 	panicOnError(err, "error running jobs")
 
 	fmt.Println("the nearest coords are:")
-	fmt.Println(nearest)
+	for _, listing := range nearest {
+		fmt.Printf("ID: %d, Distance %f\n", listing.ID, listing.Distance)
+	}
 
-	fmt.Println("the farthest coords are:")
-	fmt.Println(farthest)
+	fmt.Println("the furthest coords are:")
+	for _, listing := range farthest {
+		fmt.Printf("ID: %d, Distance %f\n", listing.ID, listing.Distance)
+	}
 
 }
 

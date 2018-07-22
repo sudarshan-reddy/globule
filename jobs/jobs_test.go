@@ -36,27 +36,27 @@ func Test_Run(t *testing.T) {
 			},
 			nearest: []CoordsWithDistance{
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 51.56,
-					Longitude: 4.29, ID: 9}, distance: 42628.635000264374}, //Rotterdam
+					Longitude: 4.29, ID: 9}, Distance: 42628.635000264374}, //Rotterdam
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 51.45,
-					Longitude: 1.15, ID: 6}, distance: 235439.8745583701}, //Oxford
+					Longitude: 1.15, ID: 6}, Distance: 235439.8745583701}, //Oxford
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 48.51,
-					Longitude: 2.21, ID: 13}, distance: 412576.0719002216}, //Paris
+					Longitude: 2.21, ID: 13}, Distance: 412576.0719002216}, //Paris
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 45.04,
-					Longitude: 7.42, ID: 14}, distance: 795521.4050696603}, //Turin
+					Longitude: 7.42, ID: 14}, Distance: 795521.4050696603}, //Turin
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 41.54,
-					Longitude: 12.27, ID: 7}, distance: 1.2967591730897105e+06}, //Vatican
+					Longitude: 12.27, ID: 7}, Distance: 1.2967591730897105e+06}, //Vatican
 			},
 			farthest: []CoordsWithDistance{
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 0.57,
-					Longitude: 100.21, ID: 5}, distance: 1.035015809436041e+07}, //Padang
+					Longitude: 100.21, ID: 5}, Distance: 1.035015809436041e+07}, //Padang
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 13.45,
-					Longitude: 100.28, ID: 3}, distance: 9.225285580451041e+06}, //Bangkok
+					Longitude: 100.28, ID: 3}, Distance: 9.225285580451041e+06}, //Bangkok
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 12.97,
-					Longitude: 80.22, ID: 1}, distance: 7.9007132932833405e+06}, //Chennai
+					Longitude: 80.22, ID: 1}, Distance: 7.9007132932833405e+06}, //Chennai
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 20.10,
-					Longitude: 57.30, ID: 4}, distance: 5.742918808309662e+06}, //Port Louis
+					Longitude: 57.30, ID: 4}, Distance: 5.742918808309662e+06}, //Port Louis
 				CoordsWithDistance{Coords: storage.Coords{Latitude: 8.50,
-					Longitude: 13.14, ID: 11}, distance: 4.892782897359971e+06}, //Luanda
+					Longitude: 13.14, ID: 11}, Distance: 4.892782897359971e+06}, //Luanda
 			},
 		},
 	}

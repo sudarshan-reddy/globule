@@ -23,7 +23,7 @@ type Runner struct {
 // CoordsWithDistance ...
 type CoordsWithDistance struct {
 	storage.Coords
-	distance float64
+	Distance float64
 }
 
 // New returns a new instance of Runner
@@ -51,13 +51,13 @@ func (r *Runner) Run() (nearest, farthest []CoordsWithDistance, err error) {
 	}
 
 	sort.Slice(r.coordsList, func(i, j int) bool {
-		return r.coordsList[i].distance < r.coordsList[j].distance
+		return r.coordsList[i].Distance < r.coordsList[j].Distance
 	})
 
 	nearest = r.coordsList[:r.numberOfPoints]
 	farthest = r.coordsList[len(r.coordsList)-r.numberOfPoints:]
 	sort.Slice(farthest, func(i, j int) bool {
-		return farthest[i].distance > farthest[j].distance
+		return farthest[i].Distance > farthest[j].Distance
 	})
 
 	return
@@ -65,6 +65,6 @@ func (r *Runner) Run() (nearest, farthest []CoordsWithDistance, err error) {
 
 func (r *Runner) handle(coords storage.Coords) {
 	distance := r.haversine.ShortestGCD(r.sourceCoords, coords)
-	r.coordsList = append(r.coordsList, CoordsWithDistance{Coords: coords, distance: distance})
+	r.coordsList = append(r.coordsList, CoordsWithDistance{Coords: coords, Distance: distance})
 	<-r.semaphore
 }
