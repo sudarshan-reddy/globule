@@ -59,7 +59,7 @@ func getStore(cfg *configs.Config) (storage.CoordinateStore, error) {
 
 		return memory.New(f)
 	case "psql":
-		return psql.New()
+		return psql.New(cfg.DBConnectString)
 	default:
 		return nil, errors.New("invalid input type: unsupported")
 	}
