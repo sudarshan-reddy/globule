@@ -20,7 +20,8 @@ type MainConfig struct {
 
 // CSVConfig ...
 type CSVConfig struct {
-	CSVFileName string `envconfig:"CSV_FILE_NAME" default:"./geoData.csv"`
+	CSVFileName   string `envconfig:"CSV_FILE_NAME" default:"./geoData.csv"`
+	ParallelReads int    `envconfig:"PARALLEL_READS" default:"100"`
 }
 
 // PSQLConfig ...

@@ -18,9 +18,9 @@ type memoryStore struct {
 // New returns a new instance of memoryStore that conforms to
 // storage.CoordinateStore which is basically an in memory
 // implementation
-func New(r io.Reader) (storage.CoordinateStore, error) {
+func New(r io.Reader, parallelReads int) (storage.CoordinateStore, error) {
 	memStore := memoryStore{
-		coordCh: make(chan storage.Coords, 100),
+		coordCh: make(chan storage.Coords, parallelReads),
 	}
 	reader := csv.NewReader(r)
 

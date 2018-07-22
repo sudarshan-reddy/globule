@@ -57,7 +57,7 @@ func getStore(cfg *configs.Config) (storage.CoordinateStore, error) {
 			return nil, err
 		}
 
-		return memory.New(f)
+		return memory.New(f, cfg.ParallelReads)
 	case "psql":
 		return psql.New(cfg.DBConnectString)
 	default:

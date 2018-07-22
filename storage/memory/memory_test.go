@@ -49,7 +49,7 @@ func Test_GetAll(t *testing.T) {
 	for _, testCase := range testCases {
 		t.Run(testCase.desc, func(t *testing.T) {
 			assert := assert.New(t)
-			mem, err := New(testCase.r)
+			mem, err := New(testCase.r, 3)
 			if testCase.expectedErr != nil {
 				if testCase.expectedErr.Error() != err.Error() {
 					t.Fatal("errors dont match")
